@@ -1,62 +1,75 @@
 # twitter-gemini-autopilot
 
-Small utilities to automate interactions between Twitter and Google Gemini (LLM) for tasks like content generation, posting, and automated replies.
+Small utilities to automate interactions between Twitter and a large language model (Google Gemini or other LLMs) for content generation, posting, and automated replies.
 
-## Features
-- Generate tweet content using Gemini prompts.
-- Post tweets and replies via Twitter API helpers.
-- Small CLI scripts: `main.py` (orchestrator) and `fix.py` (helper/fixes).
-- Minimal, easy-to-adapt code for experimentation and automation.
+## Project overview
+This repo contains lightweight helpers and CLI scripts to:
+- Generate tweet content and threads using LLM prompts.
+- Post tweets and replies via Twitter API wrappers.
+- Provide small maintenance/fix scripts (e.g., `fix.py`) and an orchestrator (`main.py`) for experimentation.
 
-## Prerequisites
-- Python 3.8+
-- pip
-- Twitter API credentials (API key, API secret, access token, access token secret) or Twitter developer access.
-- Google Gemini API credentials or other LLM access (if applicable).
-- `requirements.txt` included for dependencies.
+Repository layout
+- main.py — primary orchestration / entrypoint (CLI or script).
+- fix.py — helper script(s) for quick fixes or utilities.
+- requirements.txt — Python dependencies.
+- LICENSE — MIT license.
 
-## Quick setup
-1. Create and activate a virtual environment:
-   - Windows: python -m venv venv && venv\Scripts\activate
-   - macOS/Linux: python -m venv venv && source venv/bin/activate
-2. Install dependencies:
+## Quick start
+
+1. Clone
+   git clone https://github.com/santanu-p/twitter-gemini-autopilot.git
+   cd twitter-gemini-autopilot
+
+2. Create and activate a virtual environment
+   - Windows:
+     python -m venv venv
+     venv\Scripts\activate
+   - macOS/Linux:
+     python -m venv venv
+     source venv/bin/activate
+
+3. Install dependencies
    pip install -r requirements.txt
-3. Configure environment variables (example):
-   - TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET
-   - GEMINI_API_KEY (or other LLM token)
 
-## Usage
-- Inspect `main.py` and `fix.py` for entry points and configuration.
-- Example run:
+4. Configure credentials (environment variables recommended)
+   - TWITTER_API_KEY
+   - TWITTER_API_SECRET
+   - TWITTER_ACCESS_TOKEN
+   - TWITTER_ACCESS_SECRET
+   - GEMINI_API_KEY (or other LLM API key)
+
+You can use a .env loader in your code (python-dotenv) or your CI/secrets manager.
+
+## Usage examples
+- Inspect and run the orchestrator:
   python main.py --help
-- Run with environment variables set or via a .env loader in your environment.
+  python main.py --generate --post    # example flags — see main.py for exact CLI
+
+- Run a helper/fix script:
+  python fix.py
+
+Adjust flags and behavior by reading the docstrings or CLI help inside the scripts.
 
 ## Development notes
 - Keep secrets out of the repo. Use environment variables or a secrets manager.
-- Modularize prompts and posting logic before scaling to higher volume.
+- Start small: separate prompt templates, posting logic, and retry/error handling before scaling.
+- Add tests for prompt outputs and API interactions if you plan to automate at scale.
 
-## Commit & push to GitHub
+## Logging & error handling
+- Add structured logging (json/logfmt) for production runs.
+- Implement rate-limit handling and backoff for Twitter/LLM APIs.
 
-Option A — you already created a remote:
+## Contributing
+- Open issues or PRs.
+- Use feature branches, keep commits small and focused, and include tests for behavior changes.
+
+## License
+This project is released under the MIT License — see LICENSE.
+
+## Push to your GitHub repo
+(Using the repo you shared)
 git remote add origin https://github.com/santanu-p/twitter-gemini-autopilot.git
 git branch -M main
 git add .
 git commit -m "chore: update README"
 git push -u origin main
-
-Option B — using GitHub CLI (recommended if installed):
-gh repo create santanu-p/twitter-gemini-autopilot --public --source=. --remote=origin --push
-
-Option C — create repo via API with a PAT (replace $TOKEN):
-curl -H "Authorization: token $TOKEN" -d '{"name":"twitter-gemini-autopilot"}' https://api.github.com/user/repos
-git remote add origin https://github.com/<you>/twitter-gemini-autopilot.git
-git branch -M main
-git add README.md
-git commit -m "docs: update README for project"
-git push -u origin main
-
-## License
-This project is released under the MIT License — see the accompanying LICENSE file for details.
-
-## Contributing
-Open issues or PRs. Keep changes small and documented.
