@@ -81,7 +81,7 @@ class GeminiHandler:
         Step 1: Search for the latest details on: {topic}
         Step 2: Write a tweet using this EXACT structure:
 
-        [HOOK]: A short, punchy sentence (under 10 words) that sparks curiosity or emotion. No hashtags here.
+        [HOOK]: A short, punchy sentence (under 10 words) that sparks curiosity or emotion. No hashtags here. ALL CAPS.
         [BODY]: 2-3 short bullet points (use emojis like 'Example 🔴', 'Example 📉' as bullets) explaining the "Why" or "Impact".
         [CTA]: A specific question to the audience to start a debate.
 
@@ -90,7 +90,8 @@ class GeminiHandler:
         - Tone: provocative, insightful, or witty. NOT robotic or formal.
         - No "Breaking News" headers.
         - Add 2 relevant hashtags at the very bottom.
-        
+        - HOOK separated from BODY by a blank line.
+
         Return ONLY the tweet text.
         """
         
