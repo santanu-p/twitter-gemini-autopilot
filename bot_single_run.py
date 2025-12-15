@@ -43,15 +43,15 @@ class GeminiHandler:
     
     def find_trending_topic(self):
         """Find one trending topic using real-time Google Search"""
-        prompt = """Search the web and find ONE highly trending topic RIGHT NOW (today) that would make an engaging Twitter post.
+        # CHANGED: Shifted focus from 'Professional/News' to 'Debate/Opinion'
+        prompt = """Search Google Trends and news to find ONE topic that is sparking intense discussion RIGHT NOW.
 
-        Focus on a topic that is:
-        1. Currently trending TODAY
-        2. Newsworthy and timely
-        3. Has high engagement potential
-        4. Suitable for professional Twitter posts
+        Criteria for the topic:
+        1. It must be specific (e.g., not just "Climate Change", but "The specific new policy announced today").
+        2. It should be "Debatable" or "Surprising" — something people are arguing about.
+        3. Avoid purely dry financial reports or generic weather updates unless they are catastrophic.
         
-        Return ONLY the topic as plain text, nothing else. Make it specific and timely."""
+        Return ONLY the topic name as plain text. Nothing else."""
         
         try:
             config = types.GenerateContentConfig(
@@ -75,20 +75,24 @@ class GeminiHandler:
     
     def generate_tweet(self, topic):
         """Generate an engaging tweet for a topic using Google Search for accuracy"""
-        prompt = f"""Search the web for current information about: {topic}
-
-        Then create an engaging, accurate Twitter post based on the LATEST information you find.
-
-        Requirements:
-        - Maximum 280 characters
-        - Use CURRENT, ACCURATE information from your search
-        - Informative and interesting
-        - Include 2-3 relevant hashtags
-        - Professional yet conversational tone
-        - Make it timely and newsworthy
-        - No emojis unless very appropriate
+        prompt = f"""
+        Act as a top-tier social media ghostwriter. Your goal is viral engagement, not just news reporting.
         
-        Return ONLY the tweet text, nothing else. No explanations."""
+        Step 1: Search for the latest details on: {topic}
+        Step 2: Write a tweet using this EXACT structure:
+
+        [HOOK]: A short, punchy sentence (under 10 words) that sparks curiosity or emotion. No hashtags here.
+        [BODY]: 2-3 short bullet points (use emojis like 'Example 🔴', 'Example 📉' as bullets) explaining the "Why" or "Impact".
+        [CTA]: A specific question to the audience to start a debate.
+
+        Constraints:
+        - Total length: UNDER 270 characters (Strict limit).
+        - Tone: provocative, insightful, or witty. NOT robotic or formal.
+        - No "Breaking News" headers.
+        - Add 2 relevant hashtags at the very bottom.
+        
+        Return ONLY the tweet text.
+        """
         
         try:
             config = types.GenerateContentConfig(
