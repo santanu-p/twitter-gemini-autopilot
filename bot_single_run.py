@@ -91,6 +91,7 @@ class GeminiHandler:
         - No "Breaking News" headers.
         - Add 2 relevant hashtags at the very bottom.
         - HOOK separated from BODY by a blank line.
+        - No astericks.
 
         Return ONLY the tweet text.
         """
