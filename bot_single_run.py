@@ -33,7 +33,7 @@ class Config:
 class GeminiHandler:
     def __init__(self, api_key):
         self.client = genai.Client(api_key=api_key)
-        self.model = 'gemini-2.5-flash'
+        self.model = 'gemini-2.5-flash-lite'
         
         # Configure Google Search grounding tool
         self.grounding_tool = types.Tool(
