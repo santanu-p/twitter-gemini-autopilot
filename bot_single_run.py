@@ -44,7 +44,7 @@ class GeminiHandler:
     def find_trending_topic(self):
         """Find one trending topic using real-time Google Search"""
         # CHANGED: Shifted focus from 'Professional/News' to 'Debate/Opinion'
-        prompt = """Search Google Trends and news to find ONE topic that is sparking intense discussion RIGHT NOW.
+        prompt = """Search Google Trends and news,reddit, X to find ONE topic that is sparking intense discussion RIGHT NOW.
 
         Criteria for the topic:
         1. It must be specific (e.g., not just "Climate Change", but "The specific new policy announced today").
@@ -74,7 +74,7 @@ class GeminiHandler:
             return "Latest developments in AI technology"
     
     def generate_tweet(self, topic):
-        """Generate an engaging tweet for a topic using Google Search for accuracy"""
+        """Generate an engaging tweet for a topic using Google, reddit, X Search for accuracy"""
         prompt = f"""
         Act as a top-tier social media ghostwriter. Your goal is viral engagement, not just news reporting.
         
