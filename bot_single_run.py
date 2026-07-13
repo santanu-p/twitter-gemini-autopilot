@@ -11,6 +11,23 @@ import tweepy
 from datetime import datetime
 import json
 
+def is_refusal_response(text):
+    """Return True when Gemini responds with refusal/disclaimer content or returns an empty response."""
+    if not text:
+        return True
+
+    normalized = text.strip().lower()
+    refusal_markers = [
+        "i cannot fulfill this request",
+        "my purpose is to provide accurate and harmless information",
+        "i can't fulfill this request",
+        "i cannot assist with that",
+        "i can't assist with that",
+        "i am unable to assist with that",
+        "i'm unable to assist with that",
+    ]
+    return any(marker in normalized for marker in refusal_markers)
+
 # ============================================
 # CONFIGURATION
 # ============================================
@@ -111,6 +128,10 @@ class GeminiHandler:
             tweet = response.text.strip()
             # Remove quotes if AI added them
             tweet = tweet.strip('"').strip("'")
+
+            if is_refusal_response(tweet):
+                print("✗ Gemini returned empty/refusal/disclaimer content; skipping post.")
+                return None
             
             # Ensure it's under 280 characters
             if len(tweet) > 280:
