@@ -130,7 +130,7 @@ class GeminiHandler:
             tweet = tweet.strip('"').strip("'")
 
             if is_refusal_response(tweet):
-                print("✗ Gemini returned refusal/disclaimer content; skipping post.")
+                print("✗ Gemini returned empty/refusal/disclaimer content; skipping post.")
                 return None
             
             # Ensure it's under 280 characters
