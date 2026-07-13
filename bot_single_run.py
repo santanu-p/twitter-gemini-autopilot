@@ -12,7 +12,7 @@ from datetime import datetime
 import json
 
 def is_refusal_response(text):
-    """Return True when Gemini responds with refusal/disclaimer content."""
+    """Return True when Gemini responds with refusal/disclaimer content or returns an empty response."""
     if not text:
         return True
 
