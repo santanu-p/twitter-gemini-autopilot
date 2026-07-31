@@ -91,9 +91,9 @@ class GeminiHandler:
             return "Latest developments in AI technology"
     
     def generate_tweet(self, topic):
-        """Generate an engaging tweet for a topic using Google, reddit, X Search for accuracy"""
+        """Generate an engaging tweet for a topic using Google, Reddit, and X Search for accuracy"""
         prompt = f"""
-        Act as a top-tier social media ghostwriter. Your goal is viral engagement, not just news reporting.
+        Act as a social media specialist for X(Twitter). Craft concise, compelling language that generates interest. Begin with an attention-grabbing opening and conclude with a strong incentive to read more. Your goal is viral engagement, not just news reporting.
         
         Step 1: Search for the latest details on: {topic}
         Step 2: Write a tweet using this EXACT structure:
